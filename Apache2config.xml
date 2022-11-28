@@ -1,0 +1,19 @@
+
+<VirtualHost *:80>
+
+        ServerAdmin webmaster@44.212.4.90
+        ServerName 44.212.4.90
+        DocumentRoot /var/www/html/laravel-realworld-example-app/public
+
+
+        <Directory /var/www/html/laravel-realworld-example-app/public>
+        Options +FollowSymlinks
+        AllowOverride All
+        Require all granted
+        </Directory>
+
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost> 

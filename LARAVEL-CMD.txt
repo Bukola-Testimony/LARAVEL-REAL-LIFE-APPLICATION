@@ -1,0 +1,286 @@
+LARAVEL PROJECT: DEPLOYING REAL LIFE APPLICATION LARAVEL
+
+sudo apt update
+sudo apt upgrade
+
+INSTALL APACHE2
+sudo apt install apache2 -y
+sudo systemctl status apache2
+sudo systemctl enable apache2
+
+
+INSTALL GIT
+sudo apt install git -y
+git --version
+
+
+INSTALL PHP
+sudo apt -y install lsb-release apt-transport-https ca-certificates
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+
+
+UPDATE THE PACKAGES
+sudo apt update
+
+
+INSTALL PHP 8.1
+sudo apt install php libapache2-mod-php php8.1-mysql php8.1-common php8.1-mysql php8.1-xml php8.1-xmlrpc php8.1-curl php8.1-gd php8.1-imagick php8.1-cli php8.1-dev php8.1-imap php8.1-mbstring php8.1-opcache php8.1-soap php8.1-zip php8.1-intl -y
+
+
+CHECK VERSION
+php -v
+
+
+INSTALL MYSQL PACKAGES
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+sudo apt install ./mysql-apt-config_0.8.22-1_all.deb
+
+
+PROMPT: Which MySQL product do you wish to configure?  CLICK ENTER
+PROMPT: Which server version do you wish to receive? | (selected: mysql-8.0) CLICK ENTER
+PROMPT AGAIN: scroll to OK THEN ENTER  
+
+PROMPT: Which MySQL product do you wish to configure?  CLICK ENTER
+PROMPT: Which server version do you wish to receive? | (selected: mysql-8.0) CLICK ENTER
+PROMPT AGAIN: scroll to OK THEN ENTER  
+
+
+UPDATE THE PACKAGES
+sudo apt update
+
+
+INSTALL MYSQL
+sudo apt install mysql-server
+
+PROMPT:  Please provide a strong password that will be set for the root account of your MySQL database. Leave it blank to          enable password less login using UNIX socket based authentication.                              
+         Enter root password: 1234
+
+PROMPT: Now that you have selected a password for the root account, please confirm by typing it again. Do not  
+        share the password with anyone.                                                                        
+        Re-enter root password: 1234
+PROMPT: Use Strong Password Encryption (RECOMMENDED) CLICK ENTER
+
+PROMPT: Use Strong Password Encryption (RECOMMENDED) CLICK ENTER
+
+
+CHECK MYSQL STATUS
+sudo service mysql status
+
+
+CREATE DATABASE
+mysql -u root -p
+ENTER PASSWORD: 1234
+SHOW DATABASES;
+CREATE DATABASE bukolaApp;
+SHOW DATABASES;
+exit
+
+
+
+INSTALL COMPOSER
+curl -sS https://getcomposer.org/installer | php
+
+MAKE THE COMPOSER UNIVERAL 
+sudo mv composer.phar /usr/local/bin/composer
+
+GIVE IT EXECUTABLE RIGHTS
+sudo chmod +x /usr/local/bin/composer
+
+
+CLONE GIT REPOSITORY
+cd /var/www/html
+sudo git clone https://github.com/f1amy/laravel-realworld-example-app.git ~ My-app
+cd /var/www/html/laravel-realworld-example-app
+
+
+RUN COMPOSER INSTALL
+sudo composer install 
+NOTE: TYPE "YES" TO THE PROMPT
+
+
+CHECK LARAVEL VERSION
+php artisan
+VERSION RESPONSE: Laravel Framework 9.17.0
+
+
+
+EDIT THE APACHE VIRTUAL HOST FILE: APACHE CONFIG
+cd /etc/apache2/sites-available
+
+FIRST CREATE A NEW FILE NAMED LARAVEL.CONF USING THE BELOW COMMAND:
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/laravel.conf
+
+EDIT FILE
+sudo nano /etc/apache2/sites-available/laravel.conf
+
+<VirtualHost *:80>
+        ServerAdmin webmaster@44.212.4.90
+        ServerName 44.212.4.90
+        DocumentRoot /var/www/html/laravel-realworld-example-app/public
+
+        <Directory /var/www/html/laravel-realworld-example-app/public>
+        Options +FollowSymlinks
+        AllowOverride All
+        Require all granted
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+
+To check if syntax is correct: sudo apachectl configtest
+
+sudo a2ensite laravel.conf
+sudo systemctl restart apache2
+
+
+
+EDIT THE .ENV FILE
+cd /var/www/html/laravel-realworld-example-app/
+sudo cp .env.example .env
+edit: sudo nano .env
+
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=My-app
+DB_USERNAME=root
+DB_PASSWORD=1234
+
+
+PHP ARTISAN COMMANDS
+sudo php artisan key:generate
+sudo php artisan migrate
+php artisan serve
+
+
+LARAVEL PERMISSIONS AND DEBUG
+sudo chmod -R 775 /var/www/html/laravel-realworld-example-app
+sudo chmod -R 777 /var/www/html/laravel-realworld-example-app/storage
+sudo nano /var/www/html/laravel-realworld-example-app/routes/web.php
+uncomment last line */   */
+
+
+
+
+
+
+
+
+
+sudo nano /etc/apache2/ports.conf
+
+Listen 80
+Add: Listen 8000
+
+
+sudo service apache2 restart
+
+sudo nano /etc/hosts
+[...]
+127.0.0.1 localhost
+your-domain your-sever-name.com
+
+For example:
+12.345.678.90    altschool.demo
+
+
+
+flush dns
+resolvectl statistics | grep -i cache
+               
+Cache                      
+  Current Cache Size: 572
+          Cache Hits: 10767
+        Cache Misses: 11147
+
+resolvectl flush-caches
+resolvectl statistics | grep -i cache
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>>>>>>>>>>>>> (OPTIONAL) SECURE MYSQL >>>>>>>>>>>>>>>>>
+sudo mysql_secure_installation
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+NOTE RESPONSE: 
+Securing the MySQL server deployment.
+
+Enter password for user root:1234
+
+VALIDATE PASSWORD COMPONENT can be used to test passwords
+and improve security. It checks the strength of password
+and allows the users to set only those passwords which are
+secure enough. Would you like to setup VALIDATE PASSWORD component?
+
+Press y|Y for Yes, any other key for No: ENTER KEY
+
+
+NOTE NEXT RESPONSE: 
+Using existing password for root.
+Change the password for root ? ((Press y|Y for Yes, any other key for No) : ENTER KEY
+
+
+NEXT NOTE RESPONSE: 
+ ... skipping.
+By default, a MySQL installation has an anonymous user,
+allowing anyone to log into MySQL without having to have
+a user account created for them. This is intended only for
+testing, and to make the installation go a bit smoother.
+You should remove them before moving into a production
+environment.
+
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : ENTER KEY
+
+
+NEXT NOTE RESPONSE
+Normally, root should only be allowed to connect from
+'localhost'. This ensures that someone cannot guess at
+the root password from the network.
+
+Disallow root login remotely? (Press y|Y for Yes, any other key for No) : ENTER KEY
+
+
+NEXT NOTE RESPONSE
+ ... skipping.
+By default, MySQL comes with a database named 'test' that
+anyone can access. This is also intended only for testing,
+and should be removed before moving into a production
+environment.
+
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) : ENTER KEY
+
+
+NEXT NOTE RESPONSE
+... skipping.
+Reloading the privilege tables will ensure that all changes
+made so far will take effect immediately.
+
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y
+
+NEXT NOTE RESPONSE
+Success.
+
+All done!
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
