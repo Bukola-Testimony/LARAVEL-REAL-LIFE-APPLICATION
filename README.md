@@ -1,46 +1,29 @@
-  # LARAVEL PROJECT: DEPLOYING REAL LIFE APPLICATION 
+  
+  # DEPLOYING A LARAVEL REAL LIFE APPLICATION USING APACHE 
 
 > ![Laravel RealWorld Example App](images/logo.png)
 
 <br>
 
-- [Back to first page](../README.md)
-- [📔 Exercise 1](../README.md)
-- [📔 Exercise 2](../Exercise-2/exercise2.md)
-- [📔 Exercise 3](../Exercise-3/exercise3.md)
-- [📔 Exercise 4](../Exercise-4/exercise4.md)
-- [📔 Exercise 5](../Exercise-5/exercise5.md)
-- [📔 Exercise 6](../Exercise-6/exercise6.md)
-- [📔 Exercise 7](../Exercise-7/exercise7.md)
-- [📔 Exercise 8](../Exercise-8/exercise8.md)
-- [📔 Exercise 9](../Exercise-9/exercise9.md)
-- [📔 Exercise 10](../Exercise-10/exercise10.md)
 - [Overview](#overview) 
-- [Task](#Task-SEMESTER-PROJECT💻) 
 - [Links to files](#The-following-are-links-to-Web.php,-.env-and-Apache-config-file.) 
+- [Process](#Process)
 - [Author](#author)
-
 
 <br>
 
 ## Overview
-### LEARNING CLOUD ENGINEERING WITH ALTSCHOOL.
-<p>
-This is the end of semester Project. It has been an awesome ride so far. 
-</p> 
-
+### Deployind a Laravel Real world application using Debian 11 virtual machine instance with Amazon Web Services (AWS)
 <br>
 <br>
 
 
-## Task SEMESTER-PROJECT💻
-
-#### We will be deploying a real life application:
+## Process
 - Demo Project: https://github.com/f1amy/laravel-realworld-example-app.git
-- Setup Debain 11 on a virtual machine instance with a cloud provider or as instructed
+- Setup Debain 11 on a virtual machine instance with a cloud provider 
 - Setup Apache2 with every dependency the application needs to run
-- Don't use Laravel Sail or Docker as suggested in the project README.md file, simply clone the project with Git and deploy with apache2
-- Setup MySQL with credentials and a database for your application to use
+- clone the project with Git and deploy with apache2
+- Setup MySQL with credentials and a database for the application to use
 - Configure a subdomain if you have a domain name to point to the Vm instance or speak to an instructor for futher guide
 - You have complete the project if you are able to view the application according to the specifications in the project from your Host browser
 <br>
