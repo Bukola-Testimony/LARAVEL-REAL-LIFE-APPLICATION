@@ -13,7 +13,7 @@
 <br>
 
 ## Overview
-### Deployind a Laravel Real world application using Debian 11 virtual machine instance with Amazon Web Services (AWS)
+### Deploying a Laravel Real world application using Debian 11 virtual machine instance with Amazon Web Services (AWS)
 <br>
 <br>
 
