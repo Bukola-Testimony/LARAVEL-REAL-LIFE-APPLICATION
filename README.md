@@ -4,12 +4,12 @@
 > ![Laravel RealWorld Example App](images/logo.png)
 
 <br>
+<hr>
 
 - [Overview](#overview) 
-- [Links to files](#The-following-are-links-to-Web.php,-.env-and-Apache-config-file.) 
-- [Process](#Process)
+- [Links to files](#the-following-are-links-to-web.php,-.env-and-apache-config-file.) 
+- [Process](#process)
 - [Author](#author)
-
 <br>
 
 ## Overview
@@ -30,7 +30,7 @@
 <br>
 
 
-## The following are links to Web.php, .env and Apache-config file. 
+## The following are links to Web.php, .env and Apache-config file
  - [Web.php file](./web.php)
  - [.env file](./laravel.env)
  - [Apache-config file](./Apache2config.xml)
